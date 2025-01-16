@@ -55,7 +55,12 @@
         });
 		poswatcher = navigator.geolocation.watchPosition(showPosition);
       }
-	  function showPosition(position){
+	  function showPosition(current_pos){
+		const pos = {
+            lat: current_pos.coords.latitude,
+            lng: current_pos.coords.longitude,
+          };
+
 		var marker = new google.maps.Marker({
 			position: pos,
 			map: map,
