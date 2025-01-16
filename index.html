@@ -33,6 +33,7 @@
     <div id="capture"></div>
     <script>
       var map;
+	  var poswatcher;
       var src = 'https://drive.google.com/uc?export=kml&id=1ro8t3OM2T_RNs7QNwACjvmo1XhmUcN2e';
 
       function initMap() {
@@ -52,22 +53,16 @@
           var testimonial = document.getElementById('capture');
           testimonial.innerHTML = content;
         });
-		if (navigator.geolocation){
-			console.log('Geolocation is supported');
-			navigator.geolocation.getCurrentPosition(function(position){
-				var pos = {
-					lat: position.coords.latitude,
-					lng: position.coords.longitude
-				};
-				//show a blue dot
-				var marker = new google.maps.Marker({
-					position: pos,
-					map: map,
-					icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-				});
-			});
-		}
+		poswatcher = navigator.geolocation.watchPosition(showPosition);
       }
+	  function showPosition(position){
+		var marker = new google.maps.Marker({
+			position: pos,
+			map: map,
+			icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+		});
+	}
+
     </script>
     <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhg8bq82cx8W6bqb-KTjk1QmrgOi43gdA&callback=initMap">
